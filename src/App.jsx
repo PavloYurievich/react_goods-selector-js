@@ -14,7 +14,7 @@ export const goods = [
   'Jam',
   'Garlic',
 ];
-function selectTitte({ selected, onClear }) {
+function selectTitle({ selected, onClear }) {
   if (selected) {
     return (
       <h1 className="title is-flex is-align-items-center">
@@ -37,36 +37,38 @@ function selectTitte({ selected, onClear }) {
 }
 
 export const App = () => {
-  const [SelectGood, setSelectGood] = useState('Jam');
+  const [selectedGood, setSelectedGood] = useState('Jam');
 
   return (
     <main className="section container">
-      {selectTitte({ selected: SelectGood, onClear: setSelectGood })}
+      {selectTitle({ selected: selectedGood, onClear: setSelectedGood })}
       <table className="table">
         <tbody>
           {goods.map(n => (
             <tr
               data-cy="Good"
               key={n}
-              className={n === SelectGood ? 'has-background-success-light' : ''}
+              className={
+                n === selectedGood ? 'has-background-success-light' : ''
+              }
             >
               <td>
-                {n !== SelectGood && (
+                {n !== selectedGood && (
                   <button
                     data-cy="AddButton"
                     type="button"
                     className="button"
-                    onClick={() => setSelectGood(n)}
+                    onClick={() => setSelectedGood(n)}
                   >
                     +
                   </button>
                 )}
-                {SelectGood === n && (
+                {selectedGood === n && (
                   <button
                     data-cy="RemoveButton"
                     className="button is-info"
                     type="button"
-                    onClick={() => setSelectGood('')}
+                    onClick={() => setSelectedGood('')}
                   >
                     -
                   </button>
